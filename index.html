@@ -33,7 +33,8 @@
   .nav-links{display:flex;gap:28px;font-family:var(--mono);font-size:.74rem;letter-spacing:.08em;text-transform:uppercase}
   .nav-links a{color:var(--muted);text-decoration:none;transition:color .25s}
   .nav-links a:hover{color:var(--ink)}
-  @media(max-width:880px){.nav-links{display:none}}
+  .nav-cta{display:none;font-family:var(--mono);font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:#0c0b08;background:var(--accent);padding:9px 16px;border-radius:100px;text-decoration:none;font-weight:700}
+  @media(max-width:880px){.nav-links{display:none}.nav-cta{display:inline-block}}
 
   .hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding-top:120px;padding-bottom:60px}
   .hero-top{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:24px;margin-bottom:34px}
@@ -146,6 +147,104 @@
 
   .reveal{opacity:0;transform:translateY(28px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
   .reveal.in{opacity:1;transform:none}
+
+  /* grouped roles inside one company */
+  .role-stack{display:flex;flex-direction:column;gap:28px}
+  .role-item{padding-left:22px;border-left:2px solid var(--line)}
+  .role-item:hover{border-left-color:var(--accent)}
+  .ri-head{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px}
+  .ri-head h3{font-family:var(--serif);font-weight:420;font-size:1.2rem;letter-spacing:-.01em;margin:0}
+  .ri-date{font-family:var(--mono);font-size:.66rem;letter-spacing:.06em;text-transform:uppercase;color:var(--faint)}
+  .ri-client{font-family:var(--mono);font-size:.66rem;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);margin:6px 0 8px}
+  .role-item p{color:var(--muted);font-size:.96rem;max-width:720px}
+
+  /* AI feature section */
+  .ai-feat{background:linear-gradient(180deg,var(--bg-2),var(--bg));border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .ai-feat .wrap{padding:110px 32px}
+  .ai-top{display:grid;grid-template-columns:1.1fr .9fr;gap:60px;align-items:end;margin-bottom:60px}
+  .ai-top h2{font-family:var(--serif);font-weight:360;font-size:clamp(2.3rem,5.5vw,4.2rem);line-height:1;letter-spacing:-.02em}
+  .ai-top h2 em{font-style:italic;color:var(--accent)}
+  .ai-top p{color:var(--muted);font-size:1.08rem;line-height:1.55}
+  .ai-top p .hl{color:var(--ink);font-weight:600}
+  .ai-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .ai-card{border:1px solid var(--line);border-radius:16px;padding:32px 28px;background:var(--bg);transition:transform .3s,border-color .3s,background .3s;position:relative;overflow:hidden}
+  .ai-card:hover{transform:translateY(-5px);border-color:var(--accent)}
+  .ai-card .ic{font-family:var(--serif);font-style:italic;font-size:2.4rem;color:var(--accent);line-height:1;margin-bottom:20px;display:block}
+  .ai-card h3{font-family:var(--serif);font-weight:440;font-size:1.4rem;letter-spacing:-.01em;margin-bottom:10px}
+  .ai-card p{color:var(--muted);font-size:.94rem;line-height:1.5}
+  .ai-tools{margin-top:54px;display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+  .ai-tools .lab{font-family:var(--mono);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-right:6px}
+  @media(max-width:880px){
+    .ai-top{grid-template-columns:1fr;gap:24px;margin-bottom:40px}
+    .ai-cards{grid-template-columns:1fr;gap:14px}
+    .ai-feat .wrap{padding:72px 22px}
+  }
+
+  /* ---------- MOBILE / PHONE ---------- */
+  @media(max-width:600px){
+    .wrap{padding:0 20px}
+    .pad{padding:64px 0}
+    .pad-sm{padding:52px 0}
+    nav{padding:14px 20px}
+    nav.scrolled{padding:12px 20px}
+    .brand{font-size:1.05rem}
+
+    .hero{min-height:auto;padding-top:104px;padding-bottom:54px}
+    .hero-top{margin-bottom:24px;gap:14px}
+    .hero h1{font-size:clamp(2.9rem,15vw,4.2rem);line-height:.95}
+    .role{font-size:.7rem;letter-spacing:.1em;line-height:1.65}
+    .eyebrow{font-size:.66rem;letter-spacing:.16em}
+    .hero-lede{margin-top:32px;font-size:1.05rem}
+    .hero-cta{margin-top:30px;gap:12px}
+    .btn{padding:14px 22px;font-size:.74rem}
+    .hero-cta .btn{flex:1;justify-content:center;min-width:140px}
+    .hero-stats{margin-top:48px}
+    .hero-stats .s{padding:20px 6px}
+    .hero-stats .num{font-size:1.9rem}
+    .hero-stats .lbl{font-size:.62rem}
+
+    .sec-head{margin-bottom:36px;gap:10px}
+    .sec-head h2{font-size:clamp(1.9rem,8vw,2.4rem)}
+    .sec-idx{font-size:.68rem}
+
+    .about-side{border-left:none;border-top:1px solid var(--line);padding-left:0;padding-top:24px}
+    .about-side .v{font-size:.9rem}
+    .about-body p{font-size:1.02rem}
+
+    .tl-row{padding:28px 0;gap:14px}
+    .tl-row:hover{padding-left:0}
+    .tl-meta .co{font-size:1.2rem}
+    .tl-body h3{font-size:1.2rem}
+    .tl-body p{font-size:.96rem}
+    .role-item{padding-left:16px}
+    .ri-head h3{font-size:1.08rem}
+
+    .skill-card{padding:30px 24px}
+    .skill-card h3{font-size:1.35rem}
+
+    .band .wrap{padding:56px 20px}
+    .band-grid{gap:28px 20px}
+    .band .num{font-size:clamp(2rem,9vw,2.8rem)}
+    .band .lbl{font-size:.66rem}
+
+    .ai-top h2{font-size:clamp(2rem,9vw,2.6rem)}
+    .ai-card{padding:26px 22px}
+
+    .pill{font-size:.76rem;padding:9px 16px}
+    .pill-wrap{gap:9px}
+
+    .contact{padding:84px 0 56px}
+    .contact h2{font-size:clamp(2.3rem,12vw,3.4rem);margin:18px 0 22px}
+    .contact-links{gap:10px;width:100%}
+    .contact-links .btn{flex:1;justify-content:center;min-width:130px}
+    .foot{flex-direction:column;gap:8px;text-align:center;font-size:.68rem}
+    footer{margin-top:56px}
+  }
+
+  @media(max-width:380px){
+    .hero h1{font-size:clamp(2.5rem,14vw,3.4rem)}
+    .hero-stats{grid-template-columns:1fr 1fr}
+  }
 </style>
 </head>
 <body>
@@ -155,10 +254,12 @@
   <div class="nav-links">
     <a href="#about">About</a>
     <a href="#experience">Experience</a>
+    <a href="#ai">AI</a>
     <a href="#skills">Skills</a>
     <a href="#brands">Brands</a>
     <a href="#contact">Contact</a>
   </div>
+  <a href="#contact" class="nav-cta">Let's talk &rarr;</a>
 </nav>
 
 <!-- HERO -->
@@ -232,26 +333,28 @@
   <div class="tl-row">
     <div class="tl-meta">
       <div class="co">TaskUs</div>
-      <div class="date">Jan 2024 — Nov 2024</div>
-      <span class="badge">Subject Matter Expert</span>
+      <div class="date">Sep 2022 — Jun 2025</div>
+      <span class="badge">Customer Experience</span>
     </div>
     <div class="tl-body">
-      <h3>Subject Matter Expert</h3>
-      <p>Served as the go-to resource for complex cases and process knowledge, supporting agents with escalations, clarifying policies, and helping maintain quality and consistency across the team.</p>
-      <div class="tags"><span class="tag">Escalations</span><span class="tag">Process Knowledge</span><span class="tag">Coaching</span></div>
-    </div>
-  </div>
-
-  <div class="tl-row">
-    <div class="tl-meta">
-      <div class="co">TaskUs</div>
-      <div class="date">Sep 2022 — June 2025</div>
-      <span class="badge">Customer Service</span>
-    </div>
-    <div class="tl-body">
-      <h3>Customer Service Representative</h3>
-      <p>Provide front-line support to customers, handling inquiries and resolving issues with care and accuracy. Maintain strong CRM hygiene, hit quality and productivity targets, and keep the customer experience consistent across every interaction.</p>
-      <div class="tags"><span class="tag">Customer Support</span><span class="tag">Issue Resolution</span><span class="tag">CRM</span><span class="tag">Quality</span></div>
+      <div class="role-stack">
+        <div class="role-item">
+          <div class="ri-head"><h3>Health Care Representative</h3><span class="ri-date">Nov 2024 — Jun 2025</span></div>
+          <div class="ri-client">Client · Silna Health</div>
+          <p>Handled insurance verification for healthcare providers, confirming patient eligibility and benefits and processing prior authorization requests. Worked with sensitive information accurately and kept the process moving so care was not delayed.</p>
+        </div>
+        <div class="role-item">
+          <div class="ri-head"><h3>Subject Matter Expert</h3><span class="ri-date">Dec 2023 — Nov 2024</span></div>
+          <div class="ri-client">Client · SeatGeek</div>
+          <p>Served as the go-to resource for complex cases and process knowledge. Supported agents with escalations, clarified policies, and helped maintain quality and consistency across the team.</p>
+        </div>
+        <div class="role-item">
+          <div class="ri-head"><h3>Customer Service Representative</h3><span class="ri-date">Sep 2022 — Dec 2023</span></div>
+          <div class="ri-client">Client · SeatGeek</div>
+          <p>Provided front-line support, handling customer inquiries and resolving issues with care and accuracy while keeping CRM records clean and hitting quality and productivity targets.</p>
+        </div>
+      </div>
+      <div class="tags"><span class="tag">Customer Support</span><span class="tag">Escalations</span><span class="tag">Eligibility &amp; Benefits</span><span class="tag">Prior Authorization</span><span class="tag">CRM</span></div>
     </div>
   </div>
 
@@ -274,10 +377,47 @@
   <div class="wrap">
     <div class="band-head">At a glance</div>
     <div class="band-grid">
-      <div><div class="num">2+ yrs</div><div class="lbl">Customer support &amp; VA work</div></div>
-      <div><div class="num">3</div><div class="lbl">Roles across Concentrix &amp; TaskUs</div></div>
+      <div><div class="num">3+ yrs</div><div class="lbl">Customer experience roles</div></div>
+      <div><div class="num">4</div><div class="lbl">Roles across Concentrix &amp; TaskUs</div></div>
       <div><div class="num">100M+</div><div class="lbl">Organic views in creator campaigns</div></div>
-      <div><div class="num">Dozens</div><div class="lbl">Brands &amp; creators coordinated</div></div>
+      <div><div class="num">37</div><div class="lbl">Brands managed in operations</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- AI FEATURE -->
+<section id="ai" class="ai-feat reveal">
+  <div class="wrap">
+    <div class="eyebrow">The edge most teams are missing</div>
+    <div class="ai-top">
+      <h2>I create with <em>AI</em>, not just about it.</h2>
+      <p>AI is reshaping content, and I am already fluent in it. I generate <span class="hl">scroll-stopping images, moving hooks, and full videos</span> with Higgsfield and a wider AI toolkit, turning a brief into ready-to-post creative in a fraction of the usual time and cost. That means more tests, faster iteration, and content that keeps up with the feed.</p>
+    </div>
+    <div class="ai-cards">
+      <div class="ai-card">
+        <span class="ic">01</span>
+        <h3>AI Images</h3>
+        <p>On-brand visuals, product shots, and ad creative generated and refined to match any look without a full production shoot.</p>
+      </div>
+      <div class="ai-card">
+        <span class="ic">02</span>
+        <h3>AI Moving Hooks</h3>
+        <p>The first three seconds that stop the scroll. Animated, attention-grabbing hooks built to lift watch time and retention.</p>
+      </div>
+      <div class="ai-card">
+        <span class="ic">03</span>
+        <h3>AI Video</h3>
+        <p>Full short-form videos generated with Higgsfield, from concept to cut, ready to drop straight into a campaign.</p>
+      </div>
+    </div>
+    <div class="ai-tools">
+      <span class="lab">Built with</span>
+      <span class="pill">Higgsfield</span>
+      <span class="pill">AI Image Gen</span>
+      <span class="pill">AI Video Gen</span>
+      <span class="pill">ElevenLabs</span>
+      <span class="pill">Canva Pro</span>
+      <span class="pill">Photoshop</span>
     </div>
   </div>
 </section>
