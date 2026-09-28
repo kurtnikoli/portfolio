@@ -209,16 +209,24 @@ h1,h2,h3{overflow-wrap:anywhere;font-weight:600;letter-spacing:-.03em;line-heigh
 .hero-cta .btn{flex:1 1 150px}
 
 .orbit-wrap{position:relative;width:100%;max-width:520px;margin:0 auto;aspect-ratio:1/1}
-#orbit{width:100%;height:100%}
+#orbit{position:absolute;inset:0;width:100%;height:100%;z-index:2;pointer-events:none}
+.portrait{
+  position:absolute;left:50%;top:50%;width:56%;aspect-ratio:1/1;transform:translate(-50%,-50%);z-index:1;
+  border-radius:50%;overflow:hidden;
+  background:
+    radial-gradient(circle at 30% 22%,rgba(255,255,255,.55),transparent 55%),
+    linear-gradient(150deg,var(--c1) 0%,var(--c2) 55%,var(--c3) 100%);
+  box-shadow:0 30px 70px -24px var(--c1),0 0 0 1px rgba(255,255,255,.35) inset,0 0 0 8px color-mix(in srgb,var(--c1) 10%,transparent);
+}
+.portrait img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center bottom;transform:translateY(5%) scale(1.04)}
 .orbit-tag{
-  position:absolute;font-family:var(--mono);font-size:.68rem;color:var(--muted);
-  padding:5px 10px;border-radius:999px;border:1px solid var(--line);background:var(--card);
-  -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);white-space:nowrap;
+  position:absolute;z-index:3;font-family:var(--mono);font-size:.68rem;color:var(--muted);
+  padding:5px 10px;border-radius:999px;border:1px solid var(--line);background:var(--card-solid);white-space:nowrap;
 }
 .orbit-tag i{font-style:normal;color:var(--c1)}
-.ot1{top:12%;left:2%}
-.ot2{top:46%;right:0}
-.ot3{bottom:10%;left:10%}
+.ot1{top:9%;left:0}
+.ot2{top:17%;right:0}
+.ot3{bottom:8%;left:6%}
 
 /* HUD stats */
 .hud{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:34px}
@@ -560,8 +568,9 @@ footer{padding-top:26px;padding-bottom:34px}
       </div>
     </div>
 
-    <div class="orbit-wrap" aria-hidden="true">
-      <canvas id="orbit"></canvas>
+    <div class="orbit-wrap">
+      <div class="portrait" id="portrait"><img src="kurt_portrait.png" alt="Kurt Nicollee Santos" width="720" height="720" /></div>
+      <canvas id="orbit" aria-hidden="true"></canvas>
       <span class="orbit-tag ot1"><i>●</i> creator ops</span>
       <span class="orbit-tag ot2"><i>●</i> ai ads &amp; video</span>
       <span class="orbit-tag ot3"><i>●</i> customer experience</span>
@@ -981,7 +990,8 @@ footer{padding-top:26px;padding-bottom:34px}
   /* ---------- orbit canvas ---------- */
   var cv = document.getElementById('orbit');
   var ctx = cv.getContext('2d');
-  var W = 0, H = 0, DPR = 1, running = false, raf = null;
+  var W = 0, H = 0, DPR = 1, running = false, raf = null, PR = 0;
+  var portrait = document.getElementById('portrait');
   var col = {};
   function readColors(){
     var s = getComputedStyle(html);
@@ -1010,6 +1020,7 @@ footer{padding-top:26px;padding-bottom:34px}
     W = rect.width; H = rect.height;
     cv.width = Math.round(W*DPR); cv.height = Math.round(H*DPR);
     ctx.setTransform(DPR,0,0,DPR,0,0);
+    PR = portrait ? portrait.getBoundingClientRect().width/2 : 0;
     if(reduce) draw(0);
   }
   var mx = 0, my = 0, tmx = 0, tmy = 0;
@@ -1047,7 +1058,8 @@ footer{padding-top:26px;padding-bottom:34px}
       p = [p[0]*cz - p[1]*sz, p[0]*sz + p[1]*cz, p[2]];
       p = rot(p, 0, tiltX);
       var pr = project(p[0],p[1],p[2],R,cx,cy);
-      if(prev){
+      var behind = pr[3] <= 0 && Math.hypot(pr[0]-cx, pr[1]-cy) < PR + 2;
+      if(prev && !behind){
         ctx.strokeStyle = rgba(color, (pr[3] > 0 ? .75 : .18));
         ctx.beginPath(); ctx.moveTo(prev[0],prev[1]); ctx.lineTo(pr[0],pr[1]); ctx.stroke();
       }
@@ -1058,6 +1070,7 @@ footer{padding-top:26px;padding-bottom:34px}
     q = [q[0]*cz2 - q[1]*sz2, q[0]*sz2 + q[1]*cz2, q[2]];
     q = rot(q,0,tiltX);
     node = project(q[0],q[1],q[2],R,cx,cy);
+    if(node[3] <= 0 && Math.hypot(node[0]-cx, node[1]-cy) < PR + 6) return;
     var g = ctx.createRadialGradient(node[0],node[1],0,node[0],node[1],14);
     g.addColorStop(0, rgba(color,.9)); g.addColorStop(1, rgba(color,0));
     ctx.fillStyle = g; ctx.beginPath(); ctx.arc(node[0],node[1],14,0,Math.PI*2); ctx.fill();
@@ -1072,7 +1085,7 @@ footer{padding-top:26px;padding-bottom:34px}
     var ay = t*0.00018 + mx*.6, ax = -0.35 + my*.4;
 
     var halo = ctx.createRadialGradient(cx,cy,R*.2,cx,cy,R*1.6);
-    halo.addColorStop(0, rgba(col.c1, col.dark ? .20 : .12));
+    halo.addColorStop(0, rgba(col.c1, col.dark ? .28 : .18));
     halo.addColorStop(1, rgba(col.c1, 0));
     ctx.fillStyle = halo; ctx.beginPath(); ctx.arc(cx,cy,R*1.6,0,Math.PI*2); ctx.fill();
 
@@ -1081,7 +1094,8 @@ footer{padding-top:26px;padding-bottom:34px}
     var colors = [col.c1,col.c2,col.c3];
     for(var i=0;i<N;i++){
       var p = rot(pts[i], ay, ax);
-      var pr = project(p[0],p[1],p[2],R,cx,cy);
+      var pr = project(p[0]*1.16,p[1]*1.16,p[2]*1.16,R,cx,cy);
+      if(Math.hypot(pr[0]-cx, pr[1]-cy) < PR + 5) continue;
       var d = (p[2] + 1)/2;
       var a = 0.12 + d*0.85;
       var size = (0.6 + d*1.5) * pr[2];
